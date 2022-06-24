@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Contact Us</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman';
+            background: rgb(50, 62, 78);
+        }
+        .square {
+            height: 530px;
+            width: 600px;
+            padding: 15px;
+            position: absolute;
+            top: 56%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(91 175 202);
+            text-align: center; 
+        }
+        .square input[id="rs"]:hover {
+            width: 130px;
+            border-color: rgb(166, 138, 202);
+        }
+        .square input[id="rs"] {
+            margin: 10px auto;
+            text-align: center;
+            padding: 6px;
+            width: 155px;
+            border-color: rgb(63, 64, 65);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        .square input[id="xyz"] {
+            text-align: center;
+            padding: 6px;
+            width: 300px;
+            border-color: rgb(63, 64, 65);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        .square input[id="xyz"]:hover {
+            width: 320px;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        .header {
+            overflow: hidden;
+            background-color: rgb(91 175 202);
+            padding: 12px 20px;
+        }
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 20px;
+            border-radius: 5px;
+        }
+        .headera.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .header a:hover {
+            background-color: white;
+            color: black;
+        }
+        .headera.active {
+            background-color: green;
+            color: white;
+        }
+        .header-right {
+            float: right;
+        }
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#Logo" class="logo">Train Ticket Booking</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'index' %}">Home</a>
+            <a href="{% url 'loginUser' %}">Login</a>
+            <a href="{% url 'registerUser' %}">Register</a>
+            <a href="{% url 'aboutProj' %}">About Project</a>
+        </div>
+    </div>
+
+    <!-- action is this page itself, this page's URL -->
+    <form action="/contact/" method="post" class="square">
+        {% csrf_token %}
+        <h1>Contact Us</h1><br>
+        <input type="text" name="nm" placeholder="Your Name" size="33" id="xyz" required><br><br>
+        <input type="email" name="mail" placeholder="Your E-mail" size="33" id="xyz" required><br><br>
+        <input type="text" name="sub" placeholder="Subject" size="33" id="xyz"><br><br>
+        <textarea name="msg" cols="40" rows="5" placeholder="Your Message" required id="xyz"></textarea><br><br>
+        <input type="reset" id="rs">
+        <input type="submit" value="Contact Us" id="rs">
+    </form>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message : </strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <!-- bootstrap starter code -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

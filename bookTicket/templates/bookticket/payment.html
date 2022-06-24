@@ -1,0 +1,106 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search train</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman';
+            background: rgb(50, 62, 78);
+        }
+        .square {
+            width: 620px;
+            height: 539px;
+            padding: 30px;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(91 175 202);
+            text-align: center; 
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        .header {
+            overflow: hidden;
+            background-color: rgb(91 175 202);
+            padding: 12px 20px;
+        }
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 20px;
+            border-radius: 5px;
+        }
+        .headera.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .header a:hover {
+            background-color: white;
+            color: black;
+        }
+        .headera.active {
+            background-color: green;
+            color: white;
+        }
+        .header-right {
+            float: right;
+        }
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+        table,
+        th,
+        td {
+            left: 5%;
+            border: 1px solid rgb(0, 0, 0);
+            border-width: thin;
+        }
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+        #image { float: left;
+		  }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#Logo" class="logo">Train Ticket Booking</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'index' %}">Home</a>
+            <a href="{% url 'bookings' %}">My Booking</a>
+            <a href="{% url 'chgpass' %}">Chg Password</a>
+            <a href="{% url 'logoutUser' %}">Logout</a>
+        </div>
+    </div>
+    <div class="square">
+    <h1>Payment Gateway</h1>
+    Total Amount to Pay : <b>{{ fare }}</b>
+    (Scan this code to pay)
+    <img src="https://www.mobiletransaction.org/wp-content/uploads/2019/09/qr-code-for-wikipedia-400x400.png">
+    </div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman';
+            background: rgb(50, 62, 78);
+        }
+        .square {
+            width: 400px;
+            height: 430px;
+            padding: 40px;
+            position: absolute;
+            top: 54%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(91 175 202);
+            text-align: center; 
+        } 
+        .square input[name="username"], .square input[name="password"] {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            padding: 12px;
+            width: 230px;
+            border-color: rgb(65, 63, 63);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        .square input[name="username"]:hover, .square input[name="password"]:hover {
+            width: 270px;
+            background: rgb(50, 62, 78);
+        }
+        .square input[name="sbmt"] {
+            margin: 20px auto;
+            text-align: center;
+            padding: 12px;
+            width: 120px;
+            border-color: rgb(63, 64, 65);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        .square input[name="sbmt"]:hover {
+            width: 150px;
+            border-color: rgb(166, 138, 202);
+            background: rgb(50, 62, 78);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        .header {
+            overflow: hidden;
+            background-color: rgb(91 175 202);
+            padding: 12px 20px;
+        }
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 20px;
+            border-radius: 5px;
+        }
+        .headera.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .header a:hover {
+            background-color: white;
+            color: black;
+        }
+        .headera.active {
+            background-color: green;
+            color: white;
+        }
+        .header-right {
+            float: right;
+        }
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#Logo" class="logo">Train Ticket Booking</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'index' %}">Home</a>
+            <a href="{% url 'registerUser' %}">Register</a>
+            <a href="{% url 'contactUs' %}">Contact Us</a>
+            <a href="{% url 'aboutProj' %}">About Project</a>
+        </div>
+    </div>
+
+    <form action="" method="post" class="square">
+        <h1>Login </h1>
+        {% csrf_token %}
+        <!-- <label for="username"></label> -->
+        <input type="text" name="username" placeholder="UserName" >
+        <!-- <label for="password"></label> -->
+        <input type="password" name="password" placeholder="Password">
+
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+
+        <br><input type="submit" name="sbmt" value="Login"><br>
+        Not have account? <a href="{% url 'registerUser' %}">Register</a>
+    </form>
+</body>
+</html>

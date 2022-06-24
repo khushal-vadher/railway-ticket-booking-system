@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman';
+            background: rgb(50, 62, 78);
+        }
+        .square {
+            width: 440px;
+            height: 330px;
+            padding: 30px;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(91 175 202);
+            text-align: center; 
+        }
+        .square input[id="rs"]:hover {
+            width: 130px;
+            border-color: rgb(166, 138, 202);
+            background: rgb(50, 62, 78);
+        }
+        .square input[id="rs"] {
+            margin: 20px auto;
+            text-align: center;
+            padding: 12px;
+            width: 155px;
+            border-color: rgb(63, 64, 65);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        .square input[name="from"] {
+            margin: 20px auto;
+            text-align: center;
+            padding: 12px;
+            width: 155px;
+            border-color: rgb(63, 64, 65);
+            border-radius: 25px;
+            transition: 0.20s;
+        }
+        table, th, td {
+            padding: 2px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        .header {
+            overflow: hidden;
+            background-color:  rgb(91 175 202);
+            padding: 12px 20px;
+        }
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 20px;
+            border-radius: 5px;
+        }
+        .headera.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .header a:hover {
+            background-color: white;
+            color:  rgba(4, 84, 106, 0.699);
+        }
+        .headera.active {
+            background-color: green;
+            color: white;
+        }
+        .header-right {
+            float: right;
+        }
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#Logo" class="logo">Train Ticket Booking</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'index' %}">Home</a>
+            <a href="{% url 'bookings' %}">My Booking</a>
+            <a href="{% url 'chgpass' %}">Chg Password</a>
+            <a href="{% url 'logoutUser' %}">Logout</a>
+        </div>
+    </div>
+
+    <!-- only if user is authencated -->
+
+    {% if user.is_authenticated %}
+
+    <form action="booktrain" method="POST" class="square"> 
+    {% csrf_token %}
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+    <h1>Search</h1>
+        <table>
+            <tr>
+                <th style="width:50%"><label for="from">From :</label></th>
+                <td><select name="from" id="opt" style="width:200px;">
+                    <option value="Jamnagar">Jamnagar</option>
+                    <option value="Junagadh">Junagadh</option>
+                    <option value="Kalavad">Kalavad</option>
+                    <option value="Rajkot">Rajkot</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Porbandar">Porbandar</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Surat">Surat</option>
+                    <option value="Vankaner">Vankaner</option>
+                    <option value="Nadiad">Nadiad</option>
+                    <option value="Baroda">Baroda</option>
+                </select></td>
+            </tr>
+            <th><label for="to">To :</label></th>
+            <td><select name="to" id="opt" style="width:200px;">
+                <option value="Jamnagar">Jamnagar</option>
+                <option value="Junagadh">Junagadh</option>
+                <option value="Kalavad">Kalavad</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Porbandar">Porbandar</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Surat">Surat</option>
+                <option value="Vankaner">Vankaner</option>
+                <option value="Nadiad">Nadiad</option>
+                <option value="Baroda">Baroda</option>
+            </select></td>
+            <tr>
+                <th><label for="traveldt">Travel date :</label></th>
+                <td><input type="date" id="traveldt" name="traveldt"><br></td>
+            <tr>
+            <tr>
+                <td><input type="submit" value="Search" id="rs"></td>
+                <td><input type="reset" value="Reset" id="rs"></td>
+            </tr>
+        </table>
+    </form>
+    {% endif %}
+    from : {{arrival}} <br>to : {{destination}}<br> by User : {{user}}<br>
+    {% if all_train_details %}
+        Data is there
+        {% for data in all_train_details %}
+            {{ data.trainID }}
+        {% endfor %}
+    {% else %}
+        no data
+    {% endif %}
+    <!-- all data will be collected by function in "views.py" and according to that train will be shown -->
+</body>
+</html>
